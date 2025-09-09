@@ -17,4 +17,16 @@ class Solution:
             lst.append(temp_candy == max)
         return lst
 
-  
+"""
+Approach 2: Precompute max candy and compare with each kid (faster runtime)
+(essentially, because a kid after adding extraCandies does not have to compare with him/herself, each kid compares with the max of all kids)
+Time: O(n)
+"""
+
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        lst = []
+        max_candy = max(candies)
+        for i in range (len(candies)):
+            lst.append(candies[i]+extraCandies >= max_candy)
+        return lst
