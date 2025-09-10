@@ -41,3 +41,19 @@ class Solution:
         # if none of the above conditions are satisfied, then it is not possible to plant n more plants
         return False 
 
+"""
+Approach 2: adding sentinel (dummy) elements to the head and tail of the list to generalize them, so that I won't have to deal with them separately
+Time: O(n)
+"""
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        flowerbed_with_sentinels = [0] + flowerbed + [0]
+        for i in range (1, len(flowerbed_with_sentinels) -1):
+            if (
+                flowerbed_with_sentinels[i-1] == 0 
+                and flowerbed_with_sentinels[i] == 0 
+                and flowerbed_with_sentinels[i+1] == 0
+            ):
+                flowerbed_with_sentinels[i] = 1
+                n -= 1
+        return n <= 0
