@@ -1,3 +1,26 @@
+"""
+LeetCode 334: Increasing Triplet Subsequence
+Link: https://leetcode.com/problems/increasing-triplet-subsequence/
+
+Idea:
+- Brute-force ideas (e.g., sort and then try to recover index order, or try all pairs)
+  are either logically flawed (sorting destroys original indices) or too slow (quadratic).
+
+- The linear-time/constant-space trick:
+  Maintain two thresholds while scanning left-to-right:
+  `first`  = the smallest value seen so far
+  `second` = the smallest value > first seen so far
+  If we ever see an element > second, we’ve found first < second < current → return True.
+
+Why `<=` instead of `<`?
+- Using `<` can misclassify equals. For example, with [1,1,1],
+  the third 1 would fall into the final `else` branch and incorrectly return True.
+- Using `<=` lets us update `first`/`second` with later-equal elements so indices keep the proper order.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+"""
+
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
         # the tricky part of this problem comes down to finding a simplified algorithm
@@ -14,16 +37,16 @@ class Solution:
         # guaranteed that, if we can find another element that is bigger than second smallest element, then an
         # increasing triplet is found. 
 
+        # this step is not mandatory, but it can save some runtime by checking if the list even have at least 3     
+        # elements in it
+        if len(nums) < 3:
+            return False
+
         # this creates two variables with values being positive infinity, this makes sure that, whatever value the
         # elements in the list have, there is always at least a smallest and second smallest, if there are at least
         # 3 elements in it
         first = float('inf')
         second = float('inf')
-
-        # this step is not mandatory, but it can save some runtime by checking if the list even have at least 3     
-        # elements in it
-        if len(nums) < 3:
-            return False
 
         # the tricky part of this algorithm is that, sometimes first could be updated to the value of an element at a 
         # bigger index than the index of the second smallest element, then if next comes an element that's larger than
