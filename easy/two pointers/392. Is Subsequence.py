@@ -45,3 +45,27 @@ class Solution:
             j += 1
 
         return i == len(s)
+
+''' 
+Approach 2 (for-loop version):
+- Just walk through `t` once with a pointer `i` on `s`.
+- Every time the current char in `t` equals `s[i]`, increment `i`.
+- Because a for-loop moves forward through `t`, any next match for `s[i]`
+  must come from later in `t` — so order is naturally preserved.
+- At the end, if we matched all chars in `s` (`i == len(s)`), return True.
+
+Why a for-loop works here:
+- We only need `t` to move forward one step at a time.
+- `i` only moves when we see a match, so it never gets ahead.
+- Super readable and O(|t|) time, O(1) space.
+- (Optional) Add an early break when `i == len(s)` to shave a few cycles.
+
+Time: O(|t|)   Space: O(1)
+'''
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i = 0
+        for ch in t:
+            if i < len(s) and ch == s[i]:
+                i += 1
+        return i == len(s)
