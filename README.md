@@ -13,7 +13,7 @@ Each problem includes explanations and test cases where applicable.
 ---
 
 ## Progress
-- ✅ Completed: 1+
+- ✅ Completed: 20+
 - 🚧 In Progress: 75 problems total
 - Languages: Python (primary), Java (planned)
 
